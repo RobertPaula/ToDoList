@@ -18,14 +18,16 @@
 
   <body>
 
-   <div class="jumbotron jumbotron-fluid">
-      <div class="container">
+      <div>
+         <% if(DAY === "Saturday" || DAY === "Sunday"){ %>
+            <h1 style="color: green;"> <%= DAY %> ToDo List</h1> 
+         <%  }else{  %>
 
-        <h1 class="display-4 mb-5 text-center" style="color: green;"> <%= DAY %> ToDo List FAGGOT</h1>
+            <h1 style="color: orange;"> <%= DAY %> ToDo List</h1>
+         <% }  %>
 
 
       </div>
-   </div>
-
-  </body>
+   
+   </body>
 </html>
