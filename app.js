@@ -7,50 +7,41 @@ let bodyParser = require("body-parser");
 // My App:
   let app = express(); // initiates express
 
+   // a special bodyparser function calld urlencoded(); to fetch the data from our form in conjunction with the post route
+   app.use(bodyParser.urlencoded({extended: true})); // this allows us to fetch the data from our form html page
+  
+   let items = ['WakeUp & Paray', 'Code', 'Pray', 'Workout', 'Relax'];
+   
    app.set('view engine', 'ejs'); // initiates ejs view engine
 
    // get route to the home route
    app.get('/', (req, res) => {
 
     // logic:
+      let options = {
+            weekday : 'long',
+            day     : 'numeric', 
+            month   : 'long'
+      };
+
       let today = new Date();
-      let currentDay = today.getDay();
-      let day = "";
+      let day = today.toLocaleDateString("en-US", options);
 
-    // response from our server to the browser
-       switch (currentDay) {
-          case 0:
-             day = "Sunday";
-             break;
-          case 1:
-             day = "Monday";
-             break;
-          case 2:
-             day = "Tuesday";
-             break;
-          case 3:
-             day = "Wednesday";
-             break;
-          case 4:
-             day = "Thursday";
-             break;
-          case 5:
-             day = "Friday";
-             break;
-          case 6:
-             day = "Saturday";
-             break;
-          default:
-
-         //throws an error
-         console.log("Error: current day is equal to:" + currentDay);
-
-       }// Switch Statement
-
-             res.render('list', {DAY : day});
+      res.render('list', {DAY : day, newListItems : items});
 
 
   }); // app.get Route
+
+
+   app.post('/', (req, res) => {
+
+      item = req.body.newItem;
+      items.push(item);
+
+      res.redirect("/");
+
+
+   }); // app.get Route
 
 
    // res.send(); // this last piece is need to send our whole .get response to the browser
