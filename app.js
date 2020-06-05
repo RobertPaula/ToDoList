@@ -1,11 +1,11 @@
 // jshint esversion:6
 
 // My modules:
-let express = require('express');
-let bodyParser = require("body-parser");
+const express = require('express');
+const bodyParser = require("body-parser");
 
 // My App:
-  let app = express(); // initiates express
+  const app = express(); // initiates express
 
    // a special bodyparser function calld urlencoded(); to fetch the data from our form in conjunction with the post route
    app.use(bodyParser.urlencoded({extended: true})); // this allows us to fetch the data from our form html page
@@ -35,7 +35,7 @@ let bodyParser = require("body-parser");
 
    app.post('/', (req, res) => {
 
-      item = req.body.newItem;
+      let item = req.body.newItem;
       items.push(item);
 
       res.redirect("/");
