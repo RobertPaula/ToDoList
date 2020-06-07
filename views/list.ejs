@@ -8,12 +8,12 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>To Do List</title>
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
-
+    <title>ToDo List</title>
+    
+    <link rel="stylesheet" href="css/styles.css">
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> -->
 
 <!-- Custom styles for this template
     <link href="css/styles.css" rel="stylesheet">
@@ -22,48 +22,31 @@
 
   <body>
 
-   <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-
-      <!-- <% if(DAY === "Saturday" || DAY === "Sunday"){ %>
-
-        <h1 class="display-4 mb-5 text-center" style="color: orange;"> <%= DAY %> ToDo List</h1>
-
-      <%  }else{  %>
-
-        <h1 class="display-4 mb-5 text-center" style="color: green;"> <%= DAY %> ToDo List</h1>
-        
-      <% }  %> -->
-
-      <h1 class="display-4 mb-5 text-center" style="color: orange; "> <%= DAY %> ToDo List</h1>
-
-
+      <div class="box" id="heading">
+         <h1> <%= DAY %> ToDo List</h1>
       </div>
-   </div>
-
-   <div class="container">
-      <div class="row">
-         <div class="col-3"></div>
-         <div class="col-6">
-            <ul class="bg-info text-white pt-3 pb-3">
-             <!-- Rendering our arrya -->
-               <% for(var i=0; i < newListItems.length; i++ ) { %>
-                  <li> <%= newListItems[i] %> </li> 
-               <% } %>
 
 
-            </ul>
-            <form class="pt-3" action="/" method="POST">
-            
-               <input type="text" name="newItem">
-               <button type="submit" name="button">Add New Task</button>
+      <div class="box">
 
-            </form>
+           <!-- Rendering our arrya -->
+         <% for(var i=0; i < newListItems.length; i++ ) { %>
+
+         <div class="item">
+            <input type="checkbox">
+            <p><%= newListItems[i] %> </p> 
          </div>
-         <div class="col-3"></div>
+
+         <% } %>
+
+         <form class="item" action="/" method="POST">
+            <input type="text" name="newItem" placeholder="New Item">
+            <button type="submit" name="button">+</button>
+         </form>      
+
+         
       </div>
+     
 
-   </div>
-
-  </body>
+      </body>
 </html>

@@ -7,11 +7,15 @@ const bodyParser = require("body-parser");
 // My App:
   const app = express(); // initiates express
 
+   let items = ['WakeUp & Pray', 'Code', 'Pray', 'Workout', 'Relax'];
+
+   // a special express function called static(); to use local files and assets in our "public" folder
+   app.use(express.static("public"));  // this allows Our "Server" to use our local static files; css, img, etc. thats on our system
+   
    // a special bodyparser function calld urlencoded(); to fetch the data from our form in conjunction with the post route
    app.use(bodyParser.urlencoded({extended: true})); // this allows us to fetch the data from our form html page
-  
-   let items = ['WakeUp & Paray', 'Code', 'Pray', 'Workout', 'Relax'];
-   
+
+     
    app.set('view engine', 'ejs'); // initiates ejs view engine
 
    // get route to the home route
