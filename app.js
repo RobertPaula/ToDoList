@@ -7,7 +7,8 @@ const bodyParser = require("body-parser");
 // My App:
   const app = express(); // initiates express
 
-   let items = ['WakeUp & Pray', 'Code', 'Pray', 'Workout', 'Relax'];
+   let items = ['WakeUp & Pray', 'Code', 'Pray'];
+   let workItems =[];
 
    // a special express function called static(); to use local files and assets in our "public" folder
    app.use(express.static("public"));  // this allows Our "Server" to use our local static files; css, img, etc. thats on our system
@@ -31,25 +32,39 @@ const bodyParser = require("body-parser");
       let today = new Date();
       let day = today.toLocaleDateString("en-US", options);
 
-      res.render('list', {DAY : day, newListItems : items});
-
+      res.render('list', {listTitle : day, newListItems : items});
 
   }); // app.get Route
 
-
    app.post('/', (req, res) => {
-
+      
+      console.log(req.body);
       let item = req.body.newItem;
-      items.push(item);
 
-      res.redirect("/");
+      if(req.body.button === 'Work') {
+         workItems.push(item);
+         res.redirect("/work");
+         
+      }else{        
+         items.push(item);
+         res.redirect("/");
+      }
+
+      
+
+   }); // app.post method
 
 
-   }); // app.get Route
+   app.get('/work', (req, res) =>{ 
+      res.render('list', {listTitle : 'Work List', newListItems : workItems});
+   });
 
+
+   app.get('/about', (req, res) => { 
+      res.render('about');
+   });
 
    // res.send(); // this last piece is need to send our whole .get response to the browser
-
 
 
    // port heroku or local on 4000
