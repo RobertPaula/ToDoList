@@ -3,12 +3,14 @@
 // My modules:
 const express = require('express');
 const bodyParser = require("body-parser");
+const date = require(__dirname + "/date-module.js")// A Local Module
+
 
 // My App:
   const app = express(); // initiates express
 
-   let items = ['WakeUp & Pray', 'Code', 'Pray'];
-   let workItems =[];
+   const items = ['WakeUp & Pray', 'Code', 'Pray'];
+   const workItems =[];
 
    // a special express function called static(); to use local files and assets in our "public" folder
    app.use(express.static("public"));  // this allows Our "Server" to use our local static files; css, img, etc. thats on our system
@@ -22,15 +24,7 @@ const bodyParser = require("body-parser");
    // get route to the home route
    app.get('/', (req, res) => {
 
-    // logic:
-      let options = {
-            weekday : 'long',
-            day     : 'numeric', 
-            month   : 'long'
-      };
-
-      let today = new Date();
-      let day = today.toLocaleDateString("en-US", options);
+     const day = date.getDate();
 
       res.render('list', {listTitle : day, newListItems : items});
 
@@ -38,8 +32,8 @@ const bodyParser = require("body-parser");
 
    app.post('/', (req, res) => {
       
-      console.log(req.body);
-      let item = req.body.newItem;
+    
+      const item = req.body.newItem;
 
       if(req.body.button === 'Work') {
          workItems.push(item);
